@@ -4,8 +4,8 @@ MAINTAINER adolphlwq wlu@linkernetworks.com
 RUN ln -f -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 #install java
-RUN apt update && apt -y upgrade && \
-    apt install -y ssh rsync openjdk-7-jre supervisor curl &&
+RUN apt update && \
+    apt install -y ssh rsync openjdk-8-jre supervisor curl && \
     apt clean
 
 ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk \
@@ -15,7 +15,7 @@ ENV PATH=$JAVA_HOME/bin:$PATH \
     HD_URL="http://ftp.tc.edu.tw/pub/Apache/hadoop/common/hadoop-2.6.4/hadoop-2.6.4.tar.gz"
 
 #install hadoop
-RUN curl -fL $HD_URL | tar xvf - -C /usr/local && \
+RUN curl -fL $HD_URL | tar xzf - -C /usr/local && \
     useradd -m hadoop && \
     echo 'hadoop:hadoop' | chpasswd && \
     echo "hadoop ALL=(ALL) ALL" >> /etc/sudoers && \
