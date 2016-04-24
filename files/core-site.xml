@@ -8,6 +8,6 @@
 
   <property>
     <name>hadoop.tmp.dir</name>
-    <value>file:///data/tmp</value>
+    <value>file:///hdfsdata/tmp</value>
   </property>
 </configuration>

@@ -5,7 +5,7 @@ RUN ln -f -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 #install java
 RUN apt update && \
-    apt install -y ssh rsync openjdk-8-jre supervisor curl && \
+    apt install -y openssh-server openssh-client rsync openjdk-8-jre supervisor curl && \
     apt clean
 
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
@@ -16,6 +16,8 @@ ENV PATH=$JAVA_HOME/bin:$HADOOP_HOME/bin:$PATH \
 
 #install hadoop
 RUN curl -fL $HD_URL | tar xzf - -C /usr/local && \
+    echo 'root:root' | chpasswd  && \
+    sed -i "28s/.*/PermitRootLogin yes/g" /etc/ssh/sshd_config && \
     useradd -m hadoop && \
     echo 'hadoop:hadoop' | chpasswd && \
     echo "hadoop ALL=(ALL) ALL" >> /etc/sudoers && \
@@ -28,14 +30,10 @@ RUN curl -fL $HD_URL | tar xzf - -C /usr/local && \
 ADD supervisord.conf /etc/
 ADD files/core-site.xml $HADOOP_HOME/etc/hadoop/core-site.xml
 ADD files/hdfs-site.xml $HADOOP_HOME/etc/hadoop/hdfs-site.xml
-ADD files/config /root/.ssh/config
+#ADD files/config /root/.ssh/config
 ADD files/hadoop-env.sh $HADOOP_HOME/etc/hadoop/hadop-env.sh
 
 RUN apt install -y vim && \
-    echo y|ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key && \
-    echo y|ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key && \
-    echo y|ssh-keygen -q -N "" -t rsa -f /root/.ssh/id_rsa && \
-    cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys && \
-    chmod 600 /root/.ssh/config
+    chown hadoop:hadoop -R $$HADOOP_HOME
 
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
