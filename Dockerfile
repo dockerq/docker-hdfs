@@ -28,7 +28,14 @@ RUN curl -fL $HD_URL | tar xzf - -C /usr/local && \
 ADD supervisord.conf /etc/
 ADD files/core-site.xml $HADOOP_HOME/etc/hadoop/core-site.xml
 ADD files/hdfs-site.xml $HADOOP_HOME/etc/hadoop/hdfs-site.xml
+ADD files/config /root/.ssh/config
+ADD files/hadoop-env.sh $HADOOP_HOME/etc/hadoop/hadop-env.sh
 
-RUN apt install -y vim
+RUN apt install -y vim && \
+    ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key && \
+    ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key && \
+    ssh-keygen -q -N "" -t rsa -f /root/.ssh/id_rsa && \
+    cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys && \
+    chmod 600 /root/.ssh/config
 
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]

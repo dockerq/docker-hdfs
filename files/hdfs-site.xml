@@ -3,12 +3,12 @@
 <configuration>
     <property>
       <name>dfs.namenode.name.dir</name>
-      <value>file:///data/namenode1</value>
+      <value>file:///hdfsdata/namenode1</value>
     </property>
 
     <property>
       <name>dfs.datanode.data.dir</name>
-      <value>file:///data/datanode</value>
+      <value>file:///hdfsdata/hdfsdatanode</value>
     </property>
 
     <property>
@@ -18,7 +18,7 @@
 
     <property>
       <name>dfs.namenode.checkpoint.dir</name>
-      <value>file:///data/secondarynamenode</value>
+      <value>file:///hdfsdata/secondarynamenode</value>
     </property>
 
     <property>
