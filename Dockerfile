@@ -29,4 +29,6 @@ ADD supervisord.conf /etc/
 ADD files/core-site.xml $HADOOP_HOME/etc/hadoop/core-site.xml
 ADD files/hdfs-site.xml $HADOOP_HOME/etc/hadoop/hdfs-site.xml
 
+RUN apt install -y vim
+
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
