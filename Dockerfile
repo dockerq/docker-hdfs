@@ -1,14 +1,14 @@
-FROM ubuntu:16.04
+FROM ubuntu:14.04
 MAINTAINER adolphlwq wlu@linkernetworks.com
 
 RUN ln -f -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 #install java
 RUN apt update && \
-    apt install -y openssh-server openssh-client rsync openjdk-8-jre supervisor curl && \
+    apt install -y openssh-server openssh-client rsync openjdk-7-jre supervisor curl && \
     apt clean
 
-ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
+ENV JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64 \
     HADOOP_HOME=/usr/local/hadoop-2.6.4 \
     HADOOP_PREFIX=/usr/local/hadoop-2.6.4
 ENV PATH=$JAVA_HOME/bin:$HADOOP_HOME/bin:$PATH \
