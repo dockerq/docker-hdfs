@@ -19,7 +19,8 @@ RUN curl -fL $HD_URL | tar xzf - -C /usr/local && \
     useradd -m hadoop && \
     echo 'hadoop:hadoop' | chpasswd && \
     echo "hadoop ALL=(ALL) ALL" >> /etc/sudoers && \
-    apt remove curl
+    apt remove curl && \
+    apt clean
 #    chmod 755 -R /usr/local/hadoop-2.6.4 && \
 #    sed -i '/^export HADOOP_CONF_DIR/ s:.*:export HADOOP_CONF_DIR=/usr/local/hadoop-2.6.4/etc/hadoop:' /usr/local/hadoop-2.6.4/etc/hadoop/hadoop-env.sh && \
 #    echo 'export HADOOP_LOG_DIR' >> /usr/hadoop/etc/hadoop/hadoop-env.sh
