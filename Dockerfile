@@ -28,7 +28,7 @@ ADD supervisord.conf /etc/
 ADD files/core-site.xml $HADOOP_HOME/etc/hadoop/core-site.xml
 ADD files/hdfs-site.xml $HADOOP_HOME/etc/hadoop/hdfs-site.xml
 #ADD files/config /root/.ssh/config
-ADD files/hadoop-env.sh $HADOOP_HOME/etc/hadoop/hadop-env.sh
+ADD files/hadoop-env.sh $HADOOP_HOME/etc/hadoop/hadoop-env.sh
 
 RUN chown hadoop:hadoop -R $HADOOP_HOME
 

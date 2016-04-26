@@ -1,4 +1,4 @@
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 export HADOOP_CONF_DIR=/usr/local/hadoop-2.6.4/etc/hadoop
 
 # Extra Java CLASSPATH elements.  Automatically insert capacity-scheduler.
