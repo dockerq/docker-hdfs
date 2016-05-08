@@ -34,13 +34,19 @@ cd path/to/hadoop
 . etc/hadoop/hadoop-env.sh
 ./bin/hdfs namenode -format
 ```
-- start hdfs on standalone mode
+- start hdfs on pseudo mode
 ```
 cd path/to/hadoop
 ./sbin/start-dfs.sh
 ```
+- run hdfs pseudo mode using docker-compose
+```
+install docker-compese ##refer (https://docs.docker.com/compose/install/)
+#chanfe some config in hdfs-compose.yml
+docker-compose -f hdfs-compose.yml up -d
+```
 
 ## troubleshooting
-### sshd not working.
+### hdfssshd not working.
 You should check the config for sshd. Config file lies in `/etc/ssh/sshd_config`
 [ssh config on Ubuntu](https://help.ubuntu.com/community/SSH/OpenSSH/Configuring?highlight=%28%28SSH%29%29)

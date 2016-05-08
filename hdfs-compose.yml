@@ -1,0 +1,8 @@
+hdfs:
+    image: daocloud.io/adolphlwq/docker-hdfs:master-4dfe551
+    net: host
+    privileged: true
+    volumes:
+        - /publicdata/commondata/hdfs:/hdfsdata
+        - /publicdata/commondata/mifidata:/mifidata
+    container_name: hdfs-standalone
