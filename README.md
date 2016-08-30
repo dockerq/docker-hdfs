@@ -1,4 +1,6 @@
 # hadoop standalone mode docker image
+[![Docker Pulls](https://img.shields.io/docker/pulls/dockerq/docker-hdfs.svg?maxAge=2592000)]()
+
 ## intro
 - base image: ubuntu14.04 64 bit
 - java: openjdk-7-jre
@@ -51,6 +53,21 @@ docker-compose -f hdfs-compose.yml up -d
 The datanode and namenode is `/hdfsdata` default.So you can volumn it for data backing up.
 ```
 docker run -d --name --net host -v host_data_path:/hdfsdata dockerq/docker-hdfs
+```
+
+### change sshd listen port
+If your container network mode is `host` and you HOST is just run SSHD,you should change the sshd listen port in your container.
+1. edit /etc/ssh/sshd_config
+```
+Port 2221 (default is 22)
+```
+2.restart sshd
+```
+service ssh restart
+```
+3. add ssh port to HADOOP_HOME/etc/hadoop/hadoop-env.sh
+```
+export HADOOP_SSH_OPTS="-p 2221"
 ```
 
 ## troubleshooting
