@@ -46,7 +46,14 @@ install docker-compese ##refer (https://docs.docker.com/compose/install/)
 docker-compose -f hdfs-compose.yml up -d
 ```
 
+## optional operations
+### volumn datanode dir
+The datanode and namenode is `/hdfsdata/namenode` default.So you can volumn it for data backing up.
+```
+docker run -d --name --net host -v host_data_path:/hdfsdata/namenode dockerq/docker-hdfs
+```
+
 ## troubleshooting
-### hdfssshd not working.
+### hdfs sshd not working.
 You should check the config for sshd. Config file lies in `/etc/ssh/sshd_config`
 [ssh config on Ubuntu](https://help.ubuntu.com/community/SSH/OpenSSH/Configuring?highlight=%28%28SSH%29%29)
