@@ -48,9 +48,9 @@ docker-compose -f hdfs-compose.yml up -d
 
 ## optional operations
 ### volumn datanode dir
-The datanode and namenode is `/hdfsdata/namenode` default.So you can volumn it for data backing up.
+The datanode and namenode is `/hdfsdata` default.So you can volumn it for data backing up.
 ```
-docker run -d --name --net host -v host_data_path:/hdfsdata/namenode dockerq/docker-hdfs
+docker run -d --name --net host -v host_data_path:/hdfsdata dockerq/docker-hdfs
 ```
 
 ## troubleshooting
