@@ -57,11 +57,12 @@ docker run -d --name --net host -v host_data_path:/hdfsdata dockerq/docker-hdfs
 
 ### change sshd listen port
 If your container network mode is `host` and you HOST is just run SSHD,you should change the sshd listen port in your container.
+
 1. edit /etc/ssh/sshd_config
 ```
 Port 2221 (default is 22)
 ```
-2.restart sshd
+2. restart sshd
 ```
 service ssh restart
 ```
