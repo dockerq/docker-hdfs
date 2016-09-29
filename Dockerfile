@@ -1,12 +1,12 @@
 FROM ubuntu:16.04
-MAINTAINER adolphlwq wlu@linkernetworks.com
+MAINTAINER adolphlwq kenan3015@gmail.com
 
+# set time zone to shanghai
 RUN ln -f -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 #install java
 RUN apt-get update && \
-    apt-get install -y openssh-server openssh-client rsync openjdk-8-jre supervisor curl vim && \
-    apt-get clean
+    apt-get install -y openssh-server openssh-client rsync openjdk-8-jre curl
 
 ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
     HADOOP_HOME=/usr/local/hadoop-2.6.4 \
@@ -20,16 +20,17 @@ RUN curl -fL $HD_URL | tar xzf - -C /usr/local && \
     sed -i "28s/.*/PermitRootLogin yes/g" /etc/ssh/sshd_config && \
     useradd -m hadoop && \
     echo 'hadoop:hadoop' | chpasswd && \
-    echo "hadoop ALL=(ALL) ALL" >> /etc/sudoers && \
-    apt-get remove -y curl && \
-    chown hadoop:hadoop -R $HADOOP_HOME
+    echo "hadoop ALL=NOPASSED: ALL" >> /etc/sudoers
 
-ADD supervisord.conf /etc/
 ADD files/core-site.xml $HADOOP_HOME/etc/hadoop/core-site.xml
 ADD files/hdfs-site.xml $HADOOP_HOME/etc/hadoop/hdfs-site.xml
-#ADD files/config /root/.ssh/config
 ADD files/hadoop-env.sh $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+ADD entrypoint.sh /entrypoint.sh
 
-RUN chown hadoop:hadoop -R $HADOOP_HOME
-
-CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
+RUN chmod +x /entrypoint.sh && \
+    chown hadoop:hadoop -R $HADOOP_HOME && \
+    apt-get remove -y curl && \
+    apt-get clean && \
+    rm -rf /etc/lib/apt/lists/*
+USER hadoop
+CMD ["/entrypoint.sh"]
