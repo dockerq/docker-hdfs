@@ -1,7 +1,7 @@
-dev：build-dev
+dev:build-dev
 	docker run --net host --name hdfs-dev adolphlwq/docker-hdfs:dev
 
-prod: build-prod
+prod:build-prod
 	docker run --net host --name hdfs-prod adolphlwq/docker-hdfs:prod
 
 build-dev:
