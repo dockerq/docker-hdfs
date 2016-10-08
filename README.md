@@ -38,3 +38,10 @@ If your container network mode is `host` and your host runs SSHD too,you should 
 ### hdfs sshd not working.
 You should check the config for sshd. Config file lies in `/etc/ssh/sshd_config`
 [ssh config on Ubuntu](https://help.ubuntu.com/community/SSH/OpenSSH/Configuring?highlight=%28%28SSH%29%29)
+
+## Summary
+1. set ssh client to avoid vertificating host check
+2. set sshd default port and config HADOOP_HOME/etc/hadoop/hadoop-env.sh
+3. set sshd to permit root login
+4. understand docker cmd and entrypoint
+
