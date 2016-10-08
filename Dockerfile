@@ -17,8 +17,8 @@ ENV PATH=$JAVA_HOME/bin:$HADOOP_HOME/bin:$PATH \
 #install hadoop
 RUN curl -fL $HD_URL | tar xzf - -C /usr/local && \
     echo 'root:root' | chpasswd  && \
-    sed -i "28s/.*/PermitRootLogin yes/g" /etc/ssh/sshd_config && \
-    echo "    PermitRootLogin yes" >> /etc/ssh/ssh_config
+    sed -i "28s/.*/PermitRootLogin yes/g" /etc/ssh/sshd_config
+#    echo "    StrictHostKeyChecking no" >> /etc/ssh/ssh_config
 
 ADD files/core-site.xml $HADOOP_HOME/etc/hadoop/core-site.xml
 ADD files/hdfs-site.xml $HADOOP_HOME/etc/hadoop/hdfs-site.xml
@@ -38,4 +38,4 @@ RUN chmod +x /entrypoint.sh && \
     chmod 755 -R /hdfsdata
 
 #USER hadoop
-CMD ["/entrypoint.sh"]
+CMD ["/entrypoint.sh", "-d"]

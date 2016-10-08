@@ -3,10 +3,10 @@ hdfs-dev-state=$(shell docker inspect --format '{{.State.Status}}' hdfs-dev)
 hdfs-prod-state=$(shell docker inspect --format '{{.State.Status}}' hdfs-prod)
 
 dev:build-dev
-	docker run --net host --name hdfs-dev adolphlwq/docker-hdfs:dev
+	docker run -d --net host --name hdfs-dev adolphlwq/docker-hdfs:dev
 
 prod:build-prod
-	docker run --net host --name hdfs-prod adolphlwq/docker-hdfs:prod
+	docker run -d --net host --name hdfs-prod adolphlwq/docker-hdfs:prod
 
 build-dev:
 	docker build -t adolphlwq/docker-hdfs:dev .
