@@ -1,4 +1,4 @@
-# Hadoop standalone mode on docker
+# Standalone HDFS mode on docker
 [![Docker Pulls](https://img.shields.io/docker/pulls/dockerq/docker-hdfs.svg?maxAge=2592000)]()
 
 ## Introduction
@@ -7,41 +7,28 @@
 - default JAVA_HOME:/usr/lib/jvm/java-8-openjdk-amd64
 
 ## Usage
-### basic usage:download and run
+### quick start
   ```
   docker run -d --net host --name hdfs dockerq/docker-hdfs
   ```
+Then browser [localhost:50070](http://localhost:50070) to see HDFS WebUI
 
-### volumn datanode dir
-The datanode and namenode is `/hdfsdata` default.So you can volumn it for data backing up.
+### volumn data directory to host
+The default directory of `datanode` and `namenode` is `/hdfsdata`.So you can volumn it in onder to backing up data.
   ```
   docker run -d --name --net host -v host_data_path:/hdfsdata dockerq/docker-hdfs
   ```
 
-### change sshd listen port
-If your container network mode is `host` and your host runs SSHD too,you should change the sshd listen port in your container.
-
-1. edit /etc/ssh/sshd_config
+### change sshd binding port
+If your container's network mode is `host` and your host runs **SSHD** too,you should change your container's sshd binding port using environment `SSH_PORT`.
   ```
-  Port 2221 (default is 22)
-  ```
-2. restart sshd
-  ```
-  service ssh restart
-  ```
-3. add ssh port to HADOOP_HOME/etc/hadoop/hadoop-env.sh
-  ```
-  export HADOOP_SSH_OPTS="-p 2221"
+  docker run -d --net host -e SSH_PORT=2222 --name hdfs dockerq/docker-hdfs
   ```
 
 ## Troubleshooting
 ### hdfs sshd not working.
-You should check the config for sshd. Config file lies in `/etc/ssh/sshd_config`
+You should check the config for sshd. Config file lies in `/etc/ssh/sshd_config`. More details click
 [ssh config on Ubuntu](https://help.ubuntu.com/community/SSH/OpenSSH/Configuring?highlight=%28%28SSH%29%29)
 
 ## Summary
-1. set ssh client to avoid vertificating host check
-2. set sshd default port and config HADOOP_HOME/etc/hadoop/hadoop-env.sh
-3. set sshd to permit root login
-4. understand docker cmd and entrypoint
-
+This image aims to exploring HDFS and setuping standalone HDFS quickly.I do not suggest you use it in production environment.
