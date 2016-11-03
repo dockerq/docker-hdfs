@@ -3,7 +3,7 @@
 
 Hadoop Pseudo Distributed File System
 
-![](http://og2hmb2p7.bkt.clouddn.com/hpdfs-demo.gif)
+![](hpdfs-demo.gif)
 
 ## Introduction
 - base image: ubuntu16.04 64 bit
