@@ -1,5 +1,9 @@
-# Standalone HDFS mode on docker
+# HPDFS on docker
 [![Docker Pulls](https://img.shields.io/docker/pulls/dockerq/docker-hdfs.svg?maxAge=2592000)]()
+
+Hadoop Pseudo Distributed File System
+
+![](http://og2hmb2p7.bkt.clouddn.com/hpdfs-demo.gif)
 
 ## Introduction
 - base image: ubuntu16.04 64 bit
@@ -31,4 +35,4 @@ You should check the config for sshd. Config file lies in `/etc/ssh/sshd_config`
 [ssh config on Ubuntu](https://help.ubuntu.com/community/SSH/OpenSSH/Configuring?highlight=%28%28SSH%29%29)
 
 ## Summary
-This image aims to exploring HDFS and setuping standalone HDFS quickly.I do not suggest you use it in production environment.
+This docker image aims to exploring HDFS and setuping pseudo distributed HDFS quickly.I do not suggest you use it in production environment.
