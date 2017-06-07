@@ -1,5 +1,5 @@
 # HPDFS on docker
-[![Docker Pulls](https://img.shields.io/docker/pulls/dockerq/docker-hdfs.svg?maxAge=2592000)]()
+[![Docker Pulls](https://img.shields.io/docker/pulls/dockerq/docker-hdfs.svg)]()
 
 Hadoop Pseudo Distributed File System
 
