@@ -16,6 +16,12 @@ if [ -z $HDFSURL ]; then
 fi
 sed "6s@.*@      <value>hdfs://${HDFSURL}:9000</value>@" -i  $HADOOP_HOME/etc/hadoop/core-site.xml
 
+# set hdfs blocksize in hdfs-site.xml
+if [ -z $HDFSBLOCK ];then
+    export HDFSBLOCK=16m
+fi
+sed "21s@.*@      <value>${HDFSBLOCK}</value>@" -i $HADOOP_HOME/etc/hadoop/hdfs-site.xml
+
 # set passwdless
 ssh-keygen -t rsa -q -P '' -f /root/.ssh/id_rsa
 cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys

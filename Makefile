@@ -1,18 +1,22 @@
-empty=
-hdfs-dev-state=$(shell docker inspect --format '{{.State.Status}}' hdfs-dev)
-hdfs-prod-state=$(shell docker inspect --format '{{.State.Status}}' hdfs-prod)
-
-dev:build-dev
-	docker run -d --net host --name hdfs-dev adolphlwq/docker-hdfs:dev
-
-prod:build-prod
-	docker run -d --net host --name hdfs-prod adolphlwq/docker-hdfs:prod
+# empty=
+# hdfs-dev-state=$(shell docker inspect --format '{{.State.Status}}' hdfs-dev)
+# hdfs-prod-state=$(shell docker inspect --format '{{.State.Status}}' hdfs-prod)
 
 build-dev:
 	docker build -t adolphlwq/docker-hdfs:dev .
+run-dev:
+	docker run -d --net host --name hdfs-dev adolphlwq/docker-hdfs:dev
+clean-dev:
+	docker stop hdfs-dev
+	docker rm hdfs-dev
 
 build-prod:
 	docker build -t adolphlwq/docker-hdfs:prod .
+run-prod:
+	docker run -d --net host --name hdfs-prod adolphlwq/docker-hdfs:prod
+clean-prod:
+	docker stop hdfs-prod
+	docker rm hdfs-prod
 
 clean:
 ifdef hdfs-dev-state
